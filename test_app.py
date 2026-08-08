@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import pytest
 from app import app, mongo
 from bson.objectid import ObjectId
@@ -61,3 +62,16 @@ def test_delete_student(client):
     response = client.get(f'/delete/{student_id}', follow_redirects=True)
     assert response.status_code == 200
     assert b"Temp User" not in response.data
+=======
+import pytest
+from app import app
+
+@pytest.fixture
+def client():
+    app.testing = True
+    return app.test_client()
+
+def test_health(client):
+    response = client.get("/health")
+    assert response.status_code in [200, 500]
+>>>>>>> 7022a4e (Added Dockerfile, CI/CD workflow, health route, and README)
